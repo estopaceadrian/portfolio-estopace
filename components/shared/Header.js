@@ -44,7 +44,7 @@ const Header = ({ user, loading }) => {
               <BsNavLink href="/about" title="About" />
             </NavItem>
             <NavItem className="port-navbar-item">
-              <BsNavLink href="/portfolio " title="Portfolio" />
+              <BsNavLink href="/portfolios" title="Portfolio" />
             </NavItem>
             <NavItem className="port-navbar-item">
               <BsNavLink href="/blogs" title="Blogs" />
@@ -52,7 +52,7 @@ const Header = ({ user, loading }) => {
             <NavItem className="port-navbar-item">
               <BsNavLink href="/cv" title="CV" />
             </NavItem>
-            <NavItem className="port-navbar-item">
+            {/* <NavItem className="port-navbar-item">
               <BsNavLink href="/secret" title="Secret" />
             </NavItem>
             <NavItem className="port-navbar-item">
@@ -63,7 +63,7 @@ const Header = ({ user, loading }) => {
             </NavItem>
             <NavItem className="port-navbar-item">
               <BsNavLink href="/onlyadminssr" title="AdminSSR" />
-            </NavItem>
+            </NavItem> */}
           </Nav>
           <Nav navbar>
             {!loading && (
