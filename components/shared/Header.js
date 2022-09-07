@@ -17,15 +17,11 @@ const BsNavBrand = () => (
   </Link>
 );
 
-const LoginLink = () => (
-  <span className="nav-link port-navbar-link clickable">Login</span>
-);
+const LoginLink = () => <BsNavLink href="/api/v1/login" title="Login" />;
 
-const LogoutLink = () => (
-  <span className="nav-link port-navbar-link clickable">Logout</span>
-);
+const LogoutLink = () => <BsNavLink href="/api/v1/logout" title="Logout" />;
 
-const Header = () => {
+const Header = ({ user, loading }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -54,16 +50,36 @@ const Header = () => {
               <BsNavLink href="/blogs" title="Blogs" />
             </NavItem>
             <NavItem className="port-navbar-item">
-              <BsNavLink href="/cv" title="Cv" />
+              <BsNavLink href="/cv" title="CV" />
+            </NavItem>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/secret" title="Secret" />
+            </NavItem>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/secretssr" title="SecretSSR" />
+            </NavItem>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/onlyadmin" title="Admin" />
+            </NavItem>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/onlyadminssr" title="AdminSSR" />
             </NavItem>
           </Nav>
           <Nav navbar>
-            <NavItem className="port-navbar-item">
-              <LoginLink />
-            </NavItem>
-            <NavItem className="port-navbar-item">
-              <LogoutLink />
-            </NavItem>
+            {!loading && (
+              <>
+                {user && (
+                  <NavItem className="port-navbar-item">
+                    <LogoutLink />
+                  </NavItem>
+                )}
+                {!user && (
+                  <NavItem className="port-navbar-item">
+                    <LoginLink />
+                  </NavItem>
+                )}
+              </>
+            )}
           </Nav>
         </Collapse>
       </Navbar>
