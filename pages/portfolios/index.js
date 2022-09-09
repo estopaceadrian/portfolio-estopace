@@ -3,25 +3,34 @@ import BaseLayout from '../../components/layouts/BaseLayout';
 import BasePage from '../../components/BasePage';
 import { useGetUser } from '../../actions/user';
 import PortfolioApi from '../../lib/api/portfolios';
+import { Row, Col } from 'reactstrap';
+import PortfolioCard from '../../components/PortfolioCard';
+import { useRouter } from 'next/router';
 
 const Portfolio = ({ portfolios }) => {
   const { data: dataUser, loading: loadingUser } = useGetUser();
-
-  const renderPortfolios = (portfolios) => {
-    return portfolios.map((portfolio) => (
-      <Link
-        key={portfolio._id}
-        as={`/portfolios/${portfolio._id}`}
-        href="/portfolios/[id]"
-      >
-        <li>{portfolio.title}</li>
-      </Link>
-    ));
-  };
+  const router = useRouter();
   return (
     <BaseLayout user={dataUser} loading={loadingUser}>
-      <BasePage>
-        <ul>{renderPortfolios(portfolios)}</ul>
+      <BasePage header="Portfolios" className="portfolio-page">
+        <Row>
+          {portfolios.map((portfolio) => (
+            <>
+              <Col
+                md="4"
+                key={portfolio._id}
+                onClick={() => {
+                  router.push(
+                    '/portfolios/[id]',
+                    `/portfolios/${portfolio._id}`
+                  );
+                }}
+              >
+                <PortfolioCard portfolio={portfolio} />
+              </Col>
+            </>
+          ))}
+        </Row>
       </BasePage>
     </BaseLayout>
   );
